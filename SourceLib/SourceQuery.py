@@ -155,7 +155,7 @@ class SourceQuery(object):
             total = packet.getByte()
             num = packet.getByte()
             splitsize = packet.getShort()
-            result = [0 for x in xrange(total)]
+            result = [0 for x in range(total)]
 
             result[num] = packet.read()
 
@@ -280,7 +280,7 @@ class SourceQuery(object):
 
             # TF2 32player servers may send an incomplete reply
             try:
-                for x in xrange(numplayers):
+                for x in range(numplayers):
                     player = {}
                     player['index'] = packet.getByte()
                     player['name'] = packet.getString()
