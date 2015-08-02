@@ -172,7 +172,7 @@ class SourceQuery(object):
                 else:
                     raise SourceQueryError('Invalid split packet')
 
-            packet = SourceQueryPacket("".join(result))
+            packet = SourceQueryPacket(b"".join(result))
 
             if packet.getLong() == WHOLE:
                 return packet
