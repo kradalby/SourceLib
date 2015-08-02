@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # SourceQuery - Python class for querying info from Source Dedicated Servers
 # Copyright (c) 2010 Andreas Klauer <Andreas.Klauer@metamorpher.de>
 #
@@ -22,7 +22,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 
 """http://developer.valvesoftware.com/wiki/Server_Queries"""
 
@@ -33,14 +33,13 @@
 
 import socket
 import struct
-import sys
 import time
-from io import StringIO
+from io import BytesIO
 
-PACKETSIZE=1400
+PACKETSIZE = 1400
 
-WHOLE=-1
-SPLIT=-2
+WHOLE = -1
+SPLIT = -2
 
 # REMOVED.  DEPRECATED QUERY!
 
@@ -66,7 +65,8 @@ A2S_RULES_REPLY = ord('E')
 CHALLENGE = -1
 S2C_CHALLENGE = ord('A')
 
-class SourceQueryPacket(StringIO):
+
+class SourceQueryPacket(BytesIO):
     # putting and getting values
     def putByte(self, val):
         self.write(struct.pack('<B', val))
@@ -96,18 +96,20 @@ class SourceQueryPacket(StringIO):
         return struct.unpack('<f', self.read(4))[0]
 
     def putString(self, val):
-        self.write(val + '\x00')
+        self.write(bytes(val + '\x00', 'UTF-8'))
 
     def getString(self):
         val = self.getvalue()
         start = self.tell()
-        end = val.index('\0', start)
+        end = val.index(bytes('\0', 'UTF-8'), start)
         val = val[start:end]
         self.seek(end+1)
-        return val
+        return val.decode('UTF-8')
+
 
 class SourceQueryError(Exception):
     pass
+
 
 class SourceQuery(object):
     """Example usage:
@@ -164,7 +166,7 @@ class SourceQuery(object):
                 if packet.getLong() == SPLIT and packet.getLong() == reqid:
                     total = packet.getByte()
                     num = packet.getByte()
-                    splitsize = packet.getShort()
+                    # splitsize = packet.getShort()
                     result[num] = packet.read()
 
                 else:
@@ -306,7 +308,7 @@ class SourceQuery(object):
         # this is our rules
         if packet.getByte() == A2S_RULES_REPLY:
             rules = {}
-            numrules = packet.getShort()
+            # numrules = packet.getShort()
 
             # TF2 sends incomplete packets, so we have to ignore numrules
             while 1:
