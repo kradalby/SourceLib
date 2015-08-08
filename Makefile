@@ -14,9 +14,14 @@ clean:
 	find . -name "*.pyc" -exec rm -rf {} \;
 	rm -rf *.egg-info
 
-#test:
-#	$(MANAGE) test
-#
+flake8:
+	flake8
+
+lint: flake8
+
+test:
+	$(python) setup.py test
+
 #run:
 #	$(MANAGE) runserver 0.0.0.0:8000
 
