@@ -20,7 +20,7 @@ flake8:
 lint: flake8
 
 test:
-	$(python) setup.py test
+	$(PYTHON) setup.py test
 
 #run:
 #	$(MANAGE) runserver 0.0.0.0:8000
