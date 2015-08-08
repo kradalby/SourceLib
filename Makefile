@@ -2,6 +2,7 @@ ENV=./env/bin
 SHELL := /bin/bash
 PYTHON=$(ENV)/python
 PIP=$(ENV)/pip
+SETUP=$(PYTHON) setup.py
 
 dev: 
 	$(PIP) install -r requirements/development.txt --upgrade
@@ -20,7 +21,7 @@ flake8:
 lint: flake8
 
 test:
-	$(PYTHON) setup.py test
+	$(SETUP) test
 
 #run:
 #	$(MANAGE) runserver 0.0.0.0:8000
