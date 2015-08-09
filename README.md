@@ -1,4 +1,5 @@
 # SourceLib
+[![Build Status](http://drone.fap.no/api/badge/github.com/kradalby/SourceLib/status.svg?branch=master)](http://drone.fap.no/github.com/kradalby/SourceLib)
 
 **NOTE**
 
