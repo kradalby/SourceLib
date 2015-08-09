@@ -3,8 +3,6 @@ image: evonove/ci
 git:
   path: github.com/kradalby/sourcelib
 
-env:
-
 script:
     - pip install tox
     - tox
