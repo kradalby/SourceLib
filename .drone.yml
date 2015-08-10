@@ -1,11 +1,10 @@
 # image: kradalby/python
-image: evonove/ci
+image: kradalby/ci-tox
 
 git:
   path: github.com/kradalby/sourcelib
 
 script:
-    - pip install tox
     - tox
 
 notify:
