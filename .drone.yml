@@ -1,13 +1,13 @@
-# image: kradalby/python
-image: kradalby/ci-tox
-
-git:
-  path: github.com/kradalby/sourcelib
-
-script:
-    - tox
+build:
+    image: kradalby/ci-tox:latest
+    pull: true
+    commands:
+      - tox
 
 notify:
   email:
+    from: drone@fap.no
+    host: smtp.stud.ntnu.no
+    port: 25
     recipients:
       - kradalby@kradalby.no
