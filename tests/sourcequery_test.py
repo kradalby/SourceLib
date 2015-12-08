@@ -2,7 +2,7 @@ import unittest
 from SourceLib.SourceQuery import SourceQuery as q
 
 # This server must be up to test, kinda stupid
-TEST_SERVER = ('81.166.125.12', 27015)
+TEST_SERVER = ('81.166.125.12', 21600)
 TEST_SERVER_NAME = 'Hellfragger.no #06 Office Only :: Multigamer.no'
 TEST_SERVER_GAME = 'Counter-Strike: Source'
 
